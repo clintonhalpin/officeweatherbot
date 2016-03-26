@@ -1,8 +1,9 @@
 var Botkit = require('botkit');
 var controller = Botkit.slackbot();
+var request = require('request');
 
-const env = process.env.NODE_ENV || 'development';
-const config = require('./etc/.env' + (env ? '.' + env : '') + '.js');
+var env = process.env.NODE_ENV || 'development';
+var config = require('./etc/.env' + (env ? '.' + env : '') + '.js');
 
 if (!config.token) {
     console.log('Error: Specify token in environment');
@@ -20,11 +21,16 @@ controller.spawn({
 var weatherPhrases = ['Nice day', 'Cold out'];
 
 controller.hears(weatherPhrases, ['direct_message', 'direct_mention', 'mention', 'ambient'], function(bot, message) {
-    console.log('holler');
-    bot.startConversation(message, talkAboutTheWeather);
+    request('https://slack.com/api/users.info?token='+config.token+'&user='+message.user, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log(body); 
+        bot.startConversation(message, talkAboutTheWeather);
+      }
+    });
 });
 
 var talkAboutTheWeather = function(response, convo) {
+//    console.log(convo);
     convo.say('How about that weather today?');
 };
 

@@ -1,4 +1,4 @@
-etc/.env.development.js
+/etc/.env.development.js
 npm_debug.log
 .DS_Store
 node_modules
