@@ -1,0 +1,25 @@
+{
+  "name": "weatherbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive test --reporter --harmony spec",
+    "dev": "nodemon server.js --exec babel-node --presets es2015"
+  },
+  "author": "clintonhalpin@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "botkit": "0.0.12",
+    "chai": "^3.5.0",
+    "compression": "^1.6.1",
+    "expect": "^1.16.0",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "mocha": "^2.4.5",
+    "request": "^2.69.0"
+  },
+  "engine": {
+      "node": "5.7.0"
+  }
+}
